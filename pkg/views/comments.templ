@@ -1,0 +1,24 @@
+package views
+
+import (
+	"github.com/benallen-dev/comment-server/pkg/data"
+)
+
+templ Comment(comment data.Comment) {
+	<div>
+		<div>
+			<div id="comment-meta">
+				{ comment.Author } &lt;{ comment.Email }&gt; @ { comment.DateTime }
+			</div>
+			<div id="comment-text">
+				{ comment.Text }
+			</div>
+		</div>
+	</div>
+}
+
+templ Comments(comments []data.Comment) {
+	for _, item := range comments{
+		@Comment(item)
+	}
+}
