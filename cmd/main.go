@@ -33,6 +33,7 @@ func main() {
 
 	r.Route("/comments", func(r chi.Router) {
 		r.Get("/", handlers.GetAllComments)
+
 		r.Get("/{slug}", handlers.GetCommentForSlug)
 		r.Post("/{slug}", handlers.AddCommentToSlug)
 	})

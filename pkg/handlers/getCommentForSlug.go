@@ -5,7 +5,7 @@ import (
 	"net/http"
 
 	"github.com/a-h/templ"
-	"github.com/go-chi/chi"
+	"github.com/go-chi/chi/v5"
 
 	"github.com/benallen-dev/comment-server/pkg/data"
 	"github.com/benallen-dev/comment-server/pkg/views"
@@ -13,7 +13,6 @@ import (
 
 // GetCommentHandler handles requests for comments for a given slug
 func GetCommentForSlug(w http.ResponseWriter, r *http.Request) {
-
 	slug := chi.URLParam(r, "slug")
 
 	log.Println("GetCommentForSlug", slug)

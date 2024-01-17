@@ -7,7 +7,7 @@ import (
 	"time"
 
 	"github.com/a-h/templ"
-	"github.com/go-chi/chi"
+	"github.com/go-chi/chi/v5"
 	"github.com/google/uuid"
 
 	"github.com/benallen-dev/comment-server/pkg/data"
@@ -18,13 +18,19 @@ import (
 func AddCommentToSlug(w http.ResponseWriter, r *http.Request) {
 	slug := chi.URLParam(r, "slug")
 
+	if slug == "" {
+		log.Println("AddCommentForSlug: No slug provided")
+		http.Error(w, "No slug provided", http.StatusBadRequest)
+		return
+	}
+
 	// TODO: Figure out how to extract all these values from JSON data
 	text := r.FormValue("text")
 	author := r.FormValue("author")
 	email := r.FormValue("email")
 
 	dateTime := time.Now().Format("2006-01-02 15:04:05")
-	id, _ := uuid.NewUUID() // TODO: Handle error
+	id, _ := uuid.NewUUID()
 
 	newComment := data.Comment{
 		ID:       id,
