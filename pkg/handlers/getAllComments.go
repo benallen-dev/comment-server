@@ -2,14 +2,12 @@
 package handlers
 
 import (
-//	"fmt"
+	"encoding/json"
 	"log"
 	"net/http"
 
-	"github.com/a-h/templ"
 
 	"github.com/benallen-dev/comment-server/pkg/data"
-	"github.com/benallen-dev/comment-server/pkg/views"
 )
 
 func GetAllComments(w http.ResponseWriter, r *http.Request) {
@@ -21,5 +19,14 @@ func GetAllComments(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	templ.Handler(views.Comments(comments)).ServeHTTP(w, r)
+	jsonComments, err := json.Marshal(comments)
+	if err != nil {
+		log.Panic(err)
+		return
+	}
+
+
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+	w.Write(jsonComments)
 }

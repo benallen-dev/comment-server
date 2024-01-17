@@ -2,6 +2,8 @@ package data
 
 import (
 	"log"
+
+	"github.com/google/uuid"
 )
 
 var commentsStore map[string][]Comment
@@ -19,7 +21,7 @@ func init() {
 
 func getFakeComment(slug string) Comment {
 	return Comment{
-		ID:       "1",
+		ID:       uuid.New(),
 		Slug:     slug,
 		Author:   "Ben",
 		Email:    "ballen@anwb.nl",
@@ -29,12 +31,12 @@ func getFakeComment(slug string) Comment {
 }
 
 func GetCommentsForSlug(slug string) ([]Comment, error) {
+	commentsForSlug, ok := commentsStore[slug]
+	if !ok {
+		return []Comment{}, nil
+	}
 
-	return []Comment{
-		getFakeComment(slug),
-		getFakeComment(slug),
-		getFakeComment(slug),
-	}, nil
+	return commentsForSlug, nil
 }
 
 func AddComment(comment Comment) error {

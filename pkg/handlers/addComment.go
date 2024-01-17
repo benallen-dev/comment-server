@@ -27,7 +27,7 @@ func AddCommentToSlug(w http.ResponseWriter, r *http.Request) {
 	id, _ := uuid.NewUUID() // TODO: Handle error
 
 	newComment := data.Comment{
-		ID:       string(id[:]),
+		ID:       id,
 		Slug:     slug,
 		Author:   author,
 		Email:    email,

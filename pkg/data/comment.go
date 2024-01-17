@@ -2,14 +2,16 @@ package data
 
 import (
 	"fmt"
+
+	"github.com/google/uuid"
 )
 
 // Comment represents a comment on a page.
-// 
+//
 // Ideally you'd seperate the meta and content data but let's keep it simple.
 type Comment struct {
 	// The unique identifier for the comment.
-	ID string `json:"id"`
+	ID uuid.UUID `json:"id"`
 	// The slug of the page the comment is on.
 	Slug string `json:"slug"`
 	// The person who made the comment.
