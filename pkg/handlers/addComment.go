@@ -35,7 +35,7 @@ func AddCommentToSlug(w http.ResponseWriter, r *http.Request) {
 		Text:     text,
 	}
 
-	// TODO: Store it
+	data.AddComment(newComment)
 
 	log.Println("AddCommentForSlug", slug)
 

@@ -20,7 +20,7 @@ func main() {
 
 	r.Use(middleware.RequestID)
 	r.Use(middleware.Logger)
-	// r.Use(middleware.Recoverer)
+	r.Use(middleware.Recoverer)
 
 	r.Use(middleware.Timeout(60 * time.Second))
 	
@@ -29,6 +29,7 @@ func main() {
 	})
 
 	r.Route("/comments", func(r chi.Router) {
+		r.Get("/", handlers.GetAllComments)
 		r.Get("/{slug}", handlers.GetCommentForSlug)
 		r.Post("/{slug}", handlers.AddCommentToSlug)
 	})
