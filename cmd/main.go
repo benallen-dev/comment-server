@@ -7,6 +7,7 @@ import (
 
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
+	"github.com/go-chi/cors"
 	// "github.com/a-h/templ"
 	// "github.com/benallen-dev/comment-server/data"
 	
@@ -21,6 +22,8 @@ func main() {
 	r.Use(middleware.RequestID)
 	r.Use(middleware.Logger)
 	r.Use(middleware.Recoverer)
+
+	r.Use(cors.AllowAll().Handler)
 
 	r.Use(middleware.Timeout(60 * time.Second))
 	

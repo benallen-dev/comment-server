@@ -25,6 +25,11 @@ func GetCommentForSlug(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	if len(comments) == 0 {
+		templ.Handler(views.NoComments()).ServeHTTP(w, r)
+		return
+	}
+
 	templ.Handler(views.Comments(comments)).ServeHTTP(w, r)
 }
 

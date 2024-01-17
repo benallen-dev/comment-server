@@ -4,6 +4,10 @@ import (
 	"github.com/benallen-dev/comment-server/pkg/data"
 )
 
+templ NoComments() {
+	<p>No comments yet!</p>
+}
+
 templ Comment(comment data.Comment) {
 	<div>
 		<div>
